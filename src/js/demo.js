@@ -24,6 +24,7 @@ $(document).ready(function() {
   var entities_template = entitiesTemplate.innerHTML;
   var targetedsentiment_template = targetedsentimentTemplate.innerHTML;
   var emotion_template = emotionTemplate.innerHTML;
+  var targetedemotion_template = targetedemotionTemplate.innerHTML;
   var sentiment_template = sentimentTemplate.innerHTML;
   var keywords_template = keywordsTemplate.innerHTML;
   var title_template = titleTemplate.innerHTML;
@@ -68,6 +69,7 @@ $(document).ready(function() {
     getLanguageConcepts(text);
     getLanguageDate();
     getLanguageEmotion(text);
+    getTargetedEmotion(text);
     getLanguageSentiment(text);
     getLanguageEntities(text);
     getLanguageFeeds();
@@ -94,6 +96,7 @@ $(document).ready(function() {
     getLanguageConceptsURL(url);
     getLanguageDateURL(url);
     getLanguageEmotionURL(url);
+    getTargetedEmotionURL(url);
     getLanguageSentimentURL(url);
     getLanguageEntitiesURL(url);
     getLanguageFeedsURL(url);
@@ -145,6 +148,30 @@ $(document).ready(function() {
     }, function(data) {
       $('.emotion-table').html(_.template(emotion_template, {
         items: data.docEmotions
+      }));
+      $('#emotion-API-data').empty();
+      $('#emotion-API-data').html(JSON.stringify(data, null, 2));
+    }).fail(_error);
+  }
+
+  function getTargetedEmotion(text) {
+    $.post('/api/targetedEmotion', {
+      'text': text
+    }, function(data) {
+      $('.emotion-table').html(_.template(targetedemotion_template, {
+        items: data.TargetedEmotion
+      }));
+      $('#emotion-API-data').empty();
+      $('#emotion-API-data').html(JSON.stringify(data, null, 2));
+    }).fail(_error);
+  }
+
+  function getTargetedEmotionURL(url) {
+    $.post('/api/targetedEmotion', {
+      'url': url
+    }, function(data) {
+      $('.emotion-table').html(_.template(targetedemotion_template, {
+        items: data.TargetedEmotion
       }));
       $('#emotion-API-data').empty();
       $('#emotion-API-data').html(JSON.stringify(data, null, 2));
