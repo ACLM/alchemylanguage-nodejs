@@ -9,3 +9,5 @@ public/css/style.css
 .env
 .jshintignore
 .jshintrc
+.snyk
+package.json
