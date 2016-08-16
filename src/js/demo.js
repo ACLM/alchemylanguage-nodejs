@@ -154,29 +154,54 @@ $(document).ready(function() {
     }).fail(_error);
   }
 
-  function getTargetedEmotion(text) {
-    $.post('/api/targetedEmotion', {
-      'text': text
-    }, function(data) {
-      $('.emotion-table').html(_.template(targetedemotion_template, {
-        items: data.TargetedEmotion
-      }));
-      $('#emotion-API-data').empty();
-      $('#emotion-API-data').html(JSON.stringify(data, null, 2));
-    }).fail(_error);
-  }
 
-  function getTargetedEmotionURL(url) {
-    $.post('/api/targetedEmotion', {
-      'url': url
-    }, function(data) {
-      $('.emotion-table').html(_.template(targetedemotion_template, {
-        items: data.TargetedEmotion
-      }));
-      $('#emotion-API-data').empty();
-      $('#emotion-API-data').html(JSON.stringify(data, null, 2));
-    }).fail(_error);
-  }
+
+   function getTargetedEmotion(text) {
+     var keywordsArray = [];
+     $.post('/api/keywords', {
+       'text': text,
+       emotion: 1
+     }, function(data) {
+       data.keywords.forEach(function(keyword) {
+         keywordsArray.push(keyword.text);
+       });
+
+       $.post('/api/emotion', {
+         'text': text,
+         'targets': keywordsArray
+       }, function(emotionData) {
+         $('.targetedemotion-table').html(_.template(targetedemotion_template, {
+           items: emotionData.results
+         }));
+       }).fail(_error);
+       $('#targeted-emotion-API-data').empty();
+       $('#targeted-emotion-API-data').html(JSON.stringify(data, null, 2));
+     }).fail(_error);
+   }
+
+    function getTargetedEmotionURL(url) {
+      var keywordsArray = [];
+      $.post('/api/keywords', {
+        'url': url,
+        emotion: 1
+      }, function(data) {
+        data.keywords.forEach(function(keyword) {
+          keywordsArray.push(keyword.text);
+        });
+
+        $.post('/api/emotion', {
+          'url': url,
+          'targets': keywordsArray
+        }, function(emotionData) {
+          $('.targetedemotion-table').html(_.template(targetedemotion_template, {
+            items: emotionData.results
+          }));
+        }).fail(_error);
+        $('#targeted-emotion-API-data').empty();
+        $('#targeted-emotion-API-data').html(JSON.stringify(data, null, 2));
+      }).fail(_error);
+    }
+
 
   function getLanguageSentiment(text) {
     $.post('/api/sentiment', {

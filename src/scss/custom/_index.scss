@@ -106,7 +106,7 @@
   float: right;
 }
 
-.btn-all-results-keywords, .btn-all-results-entities, .btn-all-results-concepts, .btn-all-results-targetsentiment, .btn-all-results-relations, .btn-all-results-typedrelations {
+.btn-all-results-keywords, .btn-all-results-entities, .btn-all-results-concepts, .btn-all-results-targetsentiment, .btn-all-results-relations, .btn-all-results-typedrelations, .btn-all-results-targetedemotion {
   cursor: pointer;
   color: #435D7E;
   text-decoration: underline;
@@ -116,6 +116,7 @@
   text-align: left;
   margin-top: 5px;
   display: block;
+  margin-bottom: 10px;
 }
 
 .resultscontainter {

@@ -77,6 +77,14 @@ $(document).ready(function() {
       $(this).text('View top results');
     }
   });
+  $('.btn-all-results-targetedemotion').click(function() {
+    $('.targetedemotion:gt(1)').toggle('fast');
+    if ($.trim($(this).text()) === 'View top results') {
+      $(this).text('View all results');
+    } else {
+      $(this).text('View top results');
+    }
+  });
   // submit button code
   $('#submitbutton').click(function() {
     $('.container').hide();
@@ -170,6 +178,11 @@ $(document).ready(function() {
     }
   });
   $(document).ajaxComplete(function() {
+    if ($('.targetedemotion').length > 1) {
+      $('.targetedemotion:gt(1)').hide();
+    }
+  });
+  $(document).ajaxComplete(function() {
     if ($('.targetsentiment').length > 7) {
       $('.targetsentiment:gt(7)').hide();
     }
@@ -201,6 +214,13 @@ $(document).ready(function() {
       $('.btn-all-results-typedrelations').hide();
     } else {
       $('.btn-all-results-typedrelations').show();
+    }
+  });
+  $(document).ajaxComplete(function() {
+    if ($('.targetedemotion').length < 2) {
+      $('.btn-all-results-targetedemotion').hide();
+    } else {
+      $('.btn-all-results-targetedemotion').show();
     }
   });
   $(document).ajaxComplete(function() {

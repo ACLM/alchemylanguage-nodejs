@@ -324,26 +324,25 @@
                             </p>
                             <div class="btn-all-container">
                                 <div class="base--p right-float"><span class="icon icon-code"></span>
-                                    <span class="base--a json-btn" target="49" href="">View JSON</span>
+                                    <span class="base--a json-btn" target="54" href="">View JSON</span>
                                 </div>
                             </div>
-                            <div id="json49" class="input--API base--code int-hide">
+                            <div id="json54" class="input--API base--code int-hide">
                                 <pre class="API--json">
-                                    <code id="emotion-API-data" class="language-javascript ">
+                                    <code id="targeted-emotion-API-data" class="language-javascript ">
                                     </code>
                                   </pre>
                             </div>
                             <table class="base--table">
-                                <thead class="base--thead">
-                                    <tr class="base--tr">
-                                        <td class="base--td">Emotion</td>
-                                        <td class="base--td">Score</td>
-                                    </tr>
-                                </thead>
-                                <tbody class="base--tbody targeted-emotion-table">
+                                <div class="base--tbody targetedemotion-table">
 
-                                </tbody>
+                                </div>
                             </table>
+
+                            <div class="btn-all-container">
+                                <div class="btn-all-results-targetedemotion arrowdown-main btn-results" href="#">View all results</div>
+
+                            </div>
 
                         </div>
 
@@ -847,42 +846,62 @@
 
         <script type="text/html" id="targetedemotionTemplate">
 <% _.each(items, function(item, key, list) { %>
-  <tr class="base--tr">
-      <td class="base--td">
-          <%= item.text %>
-      </td>
-  </tr>
+<table class="base--table targetedemotion resultscontainter">
 
-  <tr class="base--tr">
-      <td class="base--td">Anger</td>
-      <td class="base--td">
-          <%= item.emotions.anger %>
-      </td>
-  </tr>
-  <tr class="base--tr">
-      <td class="base--td">Disgust</td>
-      <td class="base--td">
-          <%= item.emotions.disgust %>
-      </td>
-  </tr>
-  <tr class="base--tr">
-      <td class="base--td">Fear</td>
-      <td class="base--td">
-          <%= item.emotions.fear %>
-      </td>
-  </tr>
-  <tr class="base--tr">
-      <td class="base--td">Joy</td>
-      <td class="base--td">
-          <%= item.emotions.joy %>
-      </td>
-  </tr>
-  <tr class="base--tr">
-      <td class="base--td">Sadness</td>
-      <td class="base--td">
-          <%= item.emotions.sadness %>
-      </td>
-  </tr>
+                    <thead class="base--thead" style="border-bottom: 0;">
+                        <tr class="base--tr">
+                            <td class="base--td">Target Phrase</td>
+                            <td class="base--td"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="base--td">
+                                <%= item.text %>
+                            </td>
+                            <td class="base--td"></td>
+                        </tr>
+                    </tbody>
+                        <thead class="base--thead base--thead nested-relations">
+                            <tr class="base--tr">
+                                <td class="base--td">Emotion</td>
+                                <td class="base--td">Score</td>
+                            </tr>
+                        </thead>
+                            <tbody>
+                              <tr class="base--tr">
+                                  <td class="base--td">Anger</td>
+                                  <td class="base--td">
+                                      <%= item.emotions.anger %>
+                                  </td>
+                              </tr>
+                              <tr class="base--tr">
+                                  <td class="base--td">Disgust</td>
+                                  <td class="base--td">
+                                      <%= item.emotions.disgust %>
+                                  </td>
+                              </tr>
+                              <tr class="base--tr">
+                                  <td class="base--td">Fear</td>
+                                  <td class="base--td">
+                                      <%= item.emotions.fear %>
+                                  </td>
+                              </tr>
+                              <tr class="base--tr">
+                                  <td class="base--td">Joy</td>
+                                  <td class="base--td">
+                                      <%= item.emotions.joy %>
+                                  </td>
+                              </tr>
+                              <tr class="base--tr">
+                                  <td class="base--td">Sadness</td>
+                                  <td class="base--td">
+                                      <%= item.emotions.sadness %>
+                                  </td>
+                              </tr>
+                                </tbody>
+                </table>
+
 <% }); %>
         </script>
 
